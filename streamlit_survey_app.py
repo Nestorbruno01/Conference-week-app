@@ -46,27 +46,41 @@ if st.button("Submit Response"):
     df_responses.to_csv(CSV_FILE, index=False)
     st.success("Your response has been recorded!")
 
+# Reset CSV file functionality
+st.subheader("Admin Panel")
+password = st.text_input("Enter password to reset responses:", type="password")
+if st.button("Reset Responses"):
+    if password == "allesneu":
+        df_responses = pd.DataFrame(columns=["Gender", "Biggest Challenge", "Biggest Help"])
+        df_responses.to_csv(CSV_FILE, index=False)
+        st.success("All responses have been reset!")
+    else:
+        st.error("Incorrect password!")
+
 # Convert responses to a DataFrame and display results
 if not df_responses.empty:
     # Plot stacked bar chart for Biggest Challenge
     st.subheader("Survey Results: Biggest Challenges in University Attainment")
     fig, ax = plt.subplots(figsize=(8, 6))
-    sns.countplot(data=df_responses, x="Biggest Challenge", hue="Gender", ax=ax)
+    df_responses_counts = df_responses.groupby(["Biggest Challenge", "Gender"]).size().reset_index(name="Count")
+    sns.barplot(data=df_responses_counts, x="Biggest Challenge", y="Count", hue="Gender", ax=ax, dodge=False)
     ax.set_xlabel("Challenges")
     ax.set_ylabel("Count")
     ax.set_title("Challenges in University Attainment by Gender")
     ax.legend(title="Gender")
     plt.xticks(rotation=45)
+    plt.yticks(range(0, int(df_responses_counts["Count"].max()) + 1))
     st.pyplot(fig)
 
     # Plot stacked bar chart for Biggest Help
     st.subheader("Survey Results: Factors that Helped in Academic Journey")
     fig, ax = plt.subplots(figsize=(8, 6))
-    sns.countplot(data=df_responses, x="Biggest Help", hue="Gender", ax=ax)
+    df_responses_counts = df_responses.groupby(["Biggest Help", "Gender"]).size().reset_index(name="Count")
+    sns.barplot(data=df_responses_counts, x="Biggest Help", y="Count", hue="Gender", ax=ax, dodge=False)
     ax.set_xlabel("Helping Factors")
     ax.set_ylabel("Count")
     ax.set_title("Factors Supporting Academic Journey by Gender")
     ax.legend(title="Gender")
     plt.xticks(rotation=45)
+    plt.yticks(range(0, int(df_responses_counts["Count"].max()) + 1))
     st.pyplot(fig)
-
