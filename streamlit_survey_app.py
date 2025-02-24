@@ -59,33 +59,28 @@ if st.button("Reset Responses"):
 
 # Convert responses to a DataFrame and display results
 if not df_responses.empty:
-    # Create a two-column layout to display results side by side
-    col1, col2 = st.columns(2)
-
     # Plot stacked bar chart for Biggest Challenge
-    with col1:
-        st.subheader("Survey Results: Biggest Challenges in University Attainment")
-        fig, ax = plt.subplots(figsize=(6, 6))
-        df_responses_counts = df_responses.groupby(["Biggest Challenge", "Gender"]).size().unstack().fillna(0)
-        df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
-        df_responses_counts.plot(kind="bar", stacked=True, colormap="viridis", ax=ax)
-        ax.set_xlabel("Supporting Factors")
-        ax.set_ylabel("Count")
-        ax.set_title("Challenges in University Attainment by Gender")
-        plt.xticks(rotation=45)
-        plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
-        st.pyplot(fig)
+    st.subheader("Survey Results: Biggest Challenges in University Attainment")
+    fig, ax = plt.subplots(figsize=(8, 6))
+    df_responses_counts = df_responses.groupby(["Biggest Challenge", "Gender"]).size().unstack().fillna(0)
+    df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
+    df_responses_counts.plot(kind="bar", stacked=True, colormap="viridis", ax=ax)
+    ax.set_xlabel("Biggest Challenges")
+    ax.set_ylabel("Count")
+    ax.set_title("Challenges in University Attainment by Gender")
+    plt.xticks(rotation=45)
+    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
+    st.pyplot(fig)
 
     # Plot stacked bar chart for Biggest Help
-    with col2:
-        st.subheader("Survey Results: Factors that Helped in Academic Journey")
-        fig, ax = plt.subplots(figsize=(6, 6))
-        df_responses_counts = df_responses.groupby(["Biggest Help", "Gender"]).size().unstack().fillna(0)
-        df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
-        df_responses_counts.plot(kind="bar", stacked=True, colormap="viridis", ax=ax)
-        ax.set_xlabel("Supporting Factors")
-        ax.set_ylabel("Count")
-        ax.set_title("Factors Supporting Academic Journey by Gender")
-        plt.xticks(rotation=45)
-        plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
-        st.pyplot(fig)
+    st.subheader("Survey Results: Factors that Helped in Academic Journey")
+    fig, ax = plt.subplots(figsize=(8, 6))
+    df_responses_counts = df_responses.groupby(["Biggest Help", "Gender"]).size().unstack().fillna(0)
+    df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
+    df_responses_counts.plot(kind="bar", stacked=True, colormap="viridis", ax=ax)
+    ax.set_xlabel("Supporting Factors")
+    ax.set_ylabel("Count")
+    ax.set_title("Factors Supporting Academic Journey by Gender")
+    plt.xticks(rotation=45)
+    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
+    st.pyplot(fig)
