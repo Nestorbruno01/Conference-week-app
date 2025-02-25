@@ -64,12 +64,12 @@ if not df_responses.empty:
 
     # Plot stacked bar chart for Biggest Challenge
     with col1:
-        st.subheader("Survey Results: Biggest Challenges in University Attainment")
+        st.subheader("Survey Results: Biggest Challenge in University Attainment")
         fig, ax = plt.subplots(figsize=(6, 6))
         df_responses_counts = df_responses.groupby(["Biggest Challenge", "Gender"]).size().unstack().fillna(0)
         df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
         df_responses_counts.plot(kind="bar", stacked=True, colormap="viridis", ax=ax)
-        ax.set_xlabel("Biggest Challenges")
+        ax.set_xlabel("Challenging Factors")
         ax.set_ylabel("Count")
         ax.set_title("Challenges in University Attainment by Gender")
         plt.xticks(rotation=45)
@@ -78,7 +78,7 @@ if not df_responses.empty:
 
     # Plot stacked bar chart for Biggest Help
     with col2:
-        st.subheader("Survey Results: Factors that Helped in Academic Journey")
+        st.subheader("Survey Results: Biggest supporting Factor in University Attainment")
         fig, ax = plt.subplots(figsize=(6, 6))
         df_responses_counts = df_responses.groupby(["Biggest Help", "Gender"]).size().unstack().fillna(0)
         df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
