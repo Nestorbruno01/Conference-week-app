@@ -70,7 +70,7 @@ if not df_responses.empty:
     ax.set_ylabel("Count")
     ax.set_title("Challenges in University Attainment by Gender")
     plt.xticks(rotation=45)
-    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1)))
+    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
     st.pyplot(fig)
 
     # Plot stacked bar chart for Biggest Help
