@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# 
-In[ ]:
-st.set_page_config(layout="wide")
-
+# In[ ]:
 try:
     import streamlit as st
     import pandas as pd
@@ -13,6 +10,9 @@ try:
 except ModuleNotFoundError:
     print("Error: The 'streamlit' module is not installed. Please install it using 'pip install streamlit'.")
     exit()
+
+# Set Streamlit page layout
+st.set_page_config(layout="wide")
 
 # Load existing responses if available
 CSV_FILE = "survey_responses.csv"
@@ -62,7 +62,7 @@ if st.button("Reset Responses"):
 if not df_responses.empty:
     # Plot stacked bar chart for Biggest Challenge
     st.subheader("Survey Results: Biggest Challenges in University Attainment")
-    fig, ax = plt.subplots(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(10, 6))
     df_responses_counts = df_responses.groupby(["Biggest Challenge", "Gender"]).size().unstack().fillna(0)
     df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
     df_responses_counts.plot(kind="bar", stacked=True, colormap="viridis", ax=ax)
@@ -70,12 +70,12 @@ if not df_responses.empty:
     ax.set_ylabel("Count")
     ax.set_title("Challenges in University Attainment by Gender")
     plt.xticks(rotation=45)
-    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
+    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1)))
     st.pyplot(fig)
 
     # Plot stacked bar chart for Biggest Help
     st.subheader("Survey Results: Factors that Helped in Academic Journey")
-    fig, ax = plt.subplots(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(10, 6))
     df_responses_counts = df_responses.groupby(["Biggest Help", "Gender"]).size().unstack().fillna(0)
     df_responses_counts = df_responses_counts.reindex(["Financial situation", "Parental education", "School support", "Cultural/family expectations", "None"], fill_value=0)
     df_responses_counts.plot(kind="bar", stacked=True, colormap="viridis", ax=ax)
@@ -83,5 +83,5 @@ if not df_responses.empty:
     ax.set_ylabel("Count")
     ax.set_title("Factors Supporting Academic Journey by Gender")
     plt.xticks(rotation=45)
-    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
+    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1)))
     st.pyplot(fig)
