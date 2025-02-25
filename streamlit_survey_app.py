@@ -83,5 +83,5 @@ if not df_responses.empty:
     ax.set_ylabel("Count")
     ax.set_title("Factors Supporting Academic Journey by Gender")
     plt.xticks(rotation=45)
-    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1)))
+    plt.yticks(range(0, int(df_responses_counts.values.max()) + 1))
     st.pyplot(fig)
