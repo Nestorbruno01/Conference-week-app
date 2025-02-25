@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # In[ ]:
-
+st.set_page_config(layout="wide")
 
 try:
     import streamlit as st
